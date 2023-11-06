@@ -2,6 +2,7 @@ using eShopSolution.Application.Catalog.Products;
 using eShopSolution.Data.EF;
 using eShopSolution.Utilities.Constants;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace eShopSolution.BackendApi
 {
@@ -20,6 +21,12 @@ namespace eShopSolution.BackendApi
 
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
+            });
+                                        
             var app = builder.Build();
 
 
@@ -37,6 +44,13 @@ namespace eShopSolution.BackendApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution v1");
+            });
 
             app.MapControllerRoute(
                 name: "default",
