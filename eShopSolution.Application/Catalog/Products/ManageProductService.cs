@@ -158,7 +158,7 @@ namespace eShopSolution.Application.Catalog.Products
             //4. Select and project
             var pageResult = new PagedResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
                 Items = data
             };
             return pageResult;
